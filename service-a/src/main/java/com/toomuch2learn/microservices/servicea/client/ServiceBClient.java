@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @FeignClient(value = "serviceb", url = "${serviceb.url}")
 public interface ServiceBClient {
-
+// comentario
     @RequestMapping(method = RequestMethod.GET, value = "/greeting")
     Greeting getGreetingMessage();
 }
