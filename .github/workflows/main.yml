@@ -54,10 +54,10 @@ jobs:
         # Construir una imagen Docker
         docker build -t cicdchacana .
 
-        # Etiqueta la imagen si es necesario
+        # Etiqueta la imagen 
         docker tag cicdchacana:latest article_dec_28_mavengradle-based-multi-module-spring-boot-microservices/imagen:1.0
 
-        # Iniciar sesión en Docker Hub u otro registro si es necesario
+        # Iniciar sesión en Docker Hub 
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
         # Empujar la imagen al registro
@@ -65,7 +65,7 @@ jobs:
 
     - name: Deploy to Docker
       run: |
-        # con Docker Compose:
+        # con Docker Compose del proyecto:
         docker-compose -f docker-compose.yml up -d
 
       env:
