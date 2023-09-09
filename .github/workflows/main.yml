@@ -3,6 +3,7 @@ name: CI/CD Pipeline mchacana
 on:
   push:
     branches:
+      - master
       - feature-ms-miguelChacana-branch
 
 jobs:
