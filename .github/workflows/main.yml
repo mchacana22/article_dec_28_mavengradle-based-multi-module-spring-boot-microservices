@@ -41,6 +41,7 @@ jobs:
           -Dsonar.login=${SONAR_TOKEN} \
           -Dsonar.projectKey=mchacana22_article_dec_28_mavengradle-based-multi-module-spring-boot-microservices \
           -Dsonar.organization=mchacana22 \
+          -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.sources=.
 
       shell: bash
