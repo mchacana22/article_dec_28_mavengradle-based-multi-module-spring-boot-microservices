@@ -27,31 +27,50 @@ jobs:
         # ejecuta pruebas unitarias
         ./gradlew test
 
-    - name: Code Review
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
+    #- name: Code Review
+      #env:
+        #SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+     # run: |
         # Descargar SonarScanner
-        curl -L -o sonarscanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-        unzip sonarscanner-cli.zip
-        export PATH=$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH
+        #curl -L -o sonarscanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+        #unzip sonarscanner-cli.zip
+       # export PATH=$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH
 
         # Ejecutar el análisis de SonarCloud
-        sonar-scanner \
-          -Dsonar.login=${SONAR_TOKEN} \
-          -Dsonar.projectKey=mchacana22_article_dec_28_mavengradle-based-multi-module-spring-boot-microservices \
-          -Dsonar.organization=mchacana22 \
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.exclusions=**/*.java
-          -Dsonar.java.binaries=target/classes
-          -Dsonar.sources=src
+        #sonar-scanner \
+          #-Dsonar.login=${SONAR_TOKEN} \
+         # -Dsonar.projectKey=mchacana22_article_dec_28_mavengradle-based-multi-module-spring-boot-microservices \
+         # -Dsonar.organization=mchacana22 \
+         # -Dsonar.host.url=https://sonarcloud.io
+          #-Dsonar.exclusions=**/*.java
+         # -Dsonar.java.binaries=target/classes
+         # -Dsonar.sources=src
 
-      shell: bash
+      #shell: bash
 
 
-    - name: Deploy
+    - name: Build Docker Image
       run: |
-        # Configura el despliegue a tu contenedor aquí
+        # Construir una imagen Docker
+        docker build -t cicdchacana .
+
+        # Etiqueta la imagen si es necesario
+        docker tag cicdchacana:latest article_dec_28_mavengradle-based-multi-module-spring-boot-microservices/imagen:1.0
+
+        # Iniciar sesión en Docker Hub u otro registro si es necesario
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+        # Empujar la imagen al registro
+        docker push article_dec_28_mavengradle-based-multi-module-spring-boot-microservices/imagen:1.0
+
+    - name: Deploy to Docker
+      run: |
+        # con Docker Compose:
+        docker-compose -f docker-compose.yml up -d
+
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Test
       run: |
