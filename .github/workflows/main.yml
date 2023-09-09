@@ -28,6 +28,8 @@ jobs:
         ./gradlew test
 
     - name: Code Review
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         # Descargar SonarScanner
         curl -L -o sonarscanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
@@ -36,7 +38,7 @@ jobs:
 
         # Ejecutar el análisis de SonarCloud
         sonar-scanner \
-          -Dsonar.login=<SONAR_TOKEN> \
+          -Dsonar.login=${SONAR_TOKEN} \
           -Dsonar.projectKey=mchacana22_article_dec_28_mavengradle-based-multi-module-spring-boot-microservices \
           -Dsonar.organization=mchacana22 \
           -Dsonar.sources=.
