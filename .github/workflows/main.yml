@@ -36,7 +36,7 @@ jobs:
 
         # Ejecutar el análisis de SonarCloud
         sonar-scanner \
-          -Dsonar.login=<TOKEN_SONARCLOUD> \
+          -Dsonar.login=<SONAR_TOKEN> \
           -Dsonar.projectKey=mi-proyecto \
           -Dsonar.organization=mi-organizacion \
           -Dsonar.sources=src
