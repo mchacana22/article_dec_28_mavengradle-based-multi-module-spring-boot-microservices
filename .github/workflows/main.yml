@@ -16,11 +16,11 @@ jobs:
 
     - name: Build
       run: |
-        # Aquí colocarías los comandos para construir tu proyecto con Maven o Gradle
-        # Por ejemplo:
-        # mvn clean install
-        # gradle build
-        # También debes ejecutar las pruebas unitarias y verificar la cobertura.
+        # Limpia y construye el proyecto con Gradle
+        ./gradlew clean build
+
+        # Opcionalmente, ejecuta pruebas unitarias
+        ./gradlew test
 
     - name: Code Review
       run: |
