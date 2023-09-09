@@ -1,0 +1,45 @@
+name: CI/CD Pipeline mchacana
+
+on:
+  push:
+    branches:
+      - feature-ms-miguelChacana-branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build
+      run: |
+        # Aquí colocarías los comandos para construir tu proyecto con Maven o Gradle
+        # Por ejemplo:
+        # mvn clean install
+        # gradle build
+        # También debes ejecutar las pruebas unitarias y verificar la cobertura.
+
+    - name: Code Review
+      run: |
+        # Aquí puedes configurar SonarCloud para analizar tu código y establecer el umbral de quiebre.
+
+    - name: Deploy
+      run: |
+        # Configura el despliegue a tu contenedor aquí
+
+    - name: Test
+      run: |
+        # Realiza pruebas de rendimiento con JMeter u otras herramientas.
+        # Ejecuta pruebas de aceptación con Postman.
+
+    - name: Generate PDF
+      run: |
+        # Genera un PDF de evidencia del quiebre.
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v2
+      with:
+        name: evidence-pdf
+        path: path/al/pdf/generado.pdf
