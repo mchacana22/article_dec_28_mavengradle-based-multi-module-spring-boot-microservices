@@ -14,12 +14,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Dar permisos de ejecución a gradlew
+      run: |
+        chmod +x ./gradlew
+      shell: bash
+
     - name: Build
       run: |
         # Limpia y construye el proyecto con Gradle
         ./gradlew clean build
 
-        # Opcionalmente, ejecuta pruebas unitarias
+        # ejecuta pruebas unitarias
         ./gradlew test
 
     - name: Code Review
