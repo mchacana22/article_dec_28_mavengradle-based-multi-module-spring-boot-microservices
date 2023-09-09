@@ -29,7 +29,20 @@ jobs:
 
     - name: Code Review
       run: |
-        # Aquí puedes configurar SonarCloud para analizar tu código y establecer el umbral de quiebre.
+        # Descargar SonarScanner
+        curl -L -o sonarscanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+        unzip sonarscanner-cli.zip
+        export PATH=$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH
+
+        # Ejecutar el análisis de SonarCloud
+        sonar-scanner \
+          -Dsonar.login=<TOKEN_SONARCLOUD> \
+          -Dsonar.projectKey=mi-proyecto \
+          -Dsonar.organization=mi-organizacion \
+          -Dsonar.sources=src
+
+      shell: bash
+
 
     - name: Deploy
       run: |
