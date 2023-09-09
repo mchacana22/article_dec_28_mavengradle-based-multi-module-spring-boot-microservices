@@ -74,12 +74,12 @@ jobs:
 
     - name: Test
       run: |
-        # Realiza pruebas de rendimiento con JMeter u otras herramientas.
-        # Ejecuta pruebas de aceptación con Postman.
+        # aca irán pruebas con jmeter
 
     - name: Generate PDF
       run: |
-        # Genera un PDF de evidencia del quiebre.
+        # si alcanzo podría generar el pdf con las evidencias dequiebre y subirlas con el sgte scrip
+      
 
     - name: Upload PDF
       uses: actions/upload-artifact@v2
